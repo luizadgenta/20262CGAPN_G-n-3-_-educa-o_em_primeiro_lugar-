@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador de Repasse do PNAE</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #f5f4f0;
+  --surface:     #ffffff;
+  --surface2:    #eeedea;
+  --border:      #d8d6ce;
+  --border2:     #c2c0b8;
+  --text:        #1a1a18;
+  --text2:       #5e5d57;
+  --text3:       #9e9d97;
+  --blue:        #185fa5;
+  --blue-bg:     #e4f0fb;
+  --blue-text:   #0c3f7a;
+  --purple:      #6d28d9;
+  --green:       #0d7a4f;
+  --green-bg:    #d1fae5;
+  --green-text:  #065f46;
+  --warn-bg:     #fffbeb;
+  --warn-border: #fcd34d;
+  --warn-text:   #78350f;
+  --radius:      10px;
+  --radius-sm:   6px;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --mono: 'Cascadia Code', 'Fira Mono', Consolas, 'Courier New', monospace;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  line-height: 1.5;
+}
+
+.wrap { max-width: 980px; margin: 0 auto; }
+
+/* ── INTRO ── */
+.intro { margin-bottom: 2.2rem; }
+
+.intro-headline {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+.intro-headline em { font-style: italic; color: var(--blue); }
+
+.intro-sub {
+  font-size: 0.97rem;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  max-width: 760px;
+}
+.intro-sub strong { color: var(--text); font-weight: 600; }
+
+.example-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  color: var(--text2);
+  max-width: 760px;
+  line-height: 1.6;
+}
+.example-box strong { color: var(--text); }
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1.8rem 0 1.25rem;
+}
+.divider-line  { flex: 1; height: 1px; background: var(--border); }
+.divider-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text3);
+  white-space: nowrap;
+}
+
+/* Generic card */
+.card, .param-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 1.4rem;
+}
+.card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 12px;
+}
+.card-note {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* Reference table (Parametros_PNAE) */
+table.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+table.ref-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border2);
+}
+table.ref-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+table.ref-table td.num, table.ref-table th.num { text-align: right; font-family: var(--mono); }
+table.ref-table tr:last-child td { border-bottom: none; }
+
+.ref-two-col { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
+@media (max-width: 700px) { .ref-two-col { grid-template-columns: 1fr; } }
+
+.source-note {
+  font-size: 11.5px;
+  color: var(--text3);
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border2);
+  line-height: 1.6;
+}
+
+/* School info card */
+.school-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 640px) { .school-grid { grid-template-columns: 1fr; } }
+.school-field .k { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 4px; }
+.school-field .v { font-size: 15px; font-weight: 600; color: var(--text); }
+
+/* Editable enrollment table */
+table.enroll-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin-bottom: 4px;
+}
+table.enroll-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border2);
+}
+table.enroll-table th.num, table.enroll-table td.num { text-align: right; }
+table.enroll-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+table.enroll-table tr:last-child td { border-bottom: none; }
+table.enroll-table input[type=number] {
+  width: 84px;
+  font-family: var(--mono);
+  font-size: 14px;
+  padding: 6px 8px;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  background: var(--surface2);
+  color: var(--text);
+  text-align: right;
+}
+table.enroll-table input[type=number]:focus { outline: 2px solid var(--blue); outline-offset: -1px; background: var(--surface); }
+table.enroll-table td.percapita { font-family: var(--mono); color: var(--text2); text-align: right; }
+tr.total-row td { font-weight: 700; border-top: 2px solid var(--border2); border-bottom: none; }
+tr.total-row td.num { font-family: var(--mono); }
+
+/* Results panel */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+@media (max-width: 760px) { .results-grid { grid-template-columns: 1fr 1fr; } }
+.result-tile {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+.result-tile .k { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text3); margin-bottom: 6px; }
+.result-tile .v { font-family: var(--mono); font-size: 1.15rem; font-weight: 700; color: var(--text); }
+.result-tile.hl { background: var(--blue-bg); border-color: #b9d7f0; }
+.result-tile.hl .v { color: var(--blue-text); }
+.result-tile.elig-yes { background: var(--green-bg); border-color: #a7e3c6; }
+.result-tile.elig-yes .v { color: var(--green-text); font-size: 0.98rem; }
+.result-tile.elig-no { background: var(--surface2); }
+.result-tile .formula-hint { font-size: 10.5px; color: var(--text3); margin-top: 4px; font-family: var(--mono); }
+
+/* Param controls (fator de ajuste) */
+.param-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 10px;
+}
+@media (max-width: 640px) { .param-grid { grid-template-columns: 1fr; } }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  margin-bottom: 5px;
+}
+.field .hint { font-weight: 400; color: var(--text3); font-size: 11px; }
+.field input {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 15px;
+  padding: 8px 10px;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  background: var(--surface2);
+  color: var(--text);
+}
+.field input:focus { outline: 2px solid var(--blue); outline-offset: -1px; background: var(--surface); }
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 99px;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  color: var(--text2);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s, opacity .12s;
+}
+.btn:hover { border-color: var(--text2); color: var(--text); }
+.btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn.primary:hover { background: var(--blue-text); border-color: var(--blue-text); }
+.btn:disabled { opacity: .4; cursor: default; }
+.btn:disabled:hover { border-color: var(--border2); color: var(--text2); }
+
+/* Adjusted model mini table */
+table.adj-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 12px;
+}
+table.adj-table th {
+  text-align: right;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--border2);
+}
+table.adj-table th:first-child, table.adj-table td:first-child { text-align: left; }
+table.adj-table td { padding: 5px 8px; border-bottom: 1px solid var(--border); text-align: right; font-family: var(--mono); color: var(--text2); }
+table.adj-table tr:last-child td { border-bottom: none; }
+table.adj-table tr.total td { font-weight: 700; color: var(--text); border-top: 1px solid var(--border2); }
+
+.tot-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-top: 12px;
+}
+.tot-label { font-family: var(--mono); font-size: 13px; color: var(--text2); }
+.tot-val   { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--blue-text); transition: color .2s; }
+.tot-val.flash { color: var(--purple); }
+
+/* ── SCENARIO STEPPER (Tabela de Dados) ── */
+.sim-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 760px) { .sim-grid { grid-template-columns: 1fr; } }
+
+.scenario-table-box {
+  background: #1e1e2e;
+  border: 1px solid #313145;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  min-height: 260px;
+}
+table.scenario-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: #cdd6f4;
+}
+table.scenario-table th {
+  text-align: right;
+  padding: 6px 10px;
+  color: #7f849c;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  border-bottom: 1px solid #45455f;
+}
+table.scenario-table th:first-child, table.scenario-table td:first-child { text-align: left; }
+table.scenario-table td { padding: 6px 10px; text-align: right; border-bottom: 1px solid #2a2a3d; opacity: 0; transform: translateY(4px); animation: rowIn .35s ease forwards; }
+table.scenario-table tr.current td { background: #313145; font-weight: 700; color: #f59e0b; }
+table.scenario-table tr.base td { color: #89b4fa; }
+@keyframes rowIn { to { opacity: 1; transform: translateY(0); } }
+.scenario-placeholder { color: #7f849c; font-size: 12.5px; padding: 30px 10px; text-align: center; }
+
+.controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.status { font-size: 13.5px; color: var(--text2); min-height: 20px; line-height: 1.5; }
+.status strong { color: var(--text); }
+.status .done-badge {
+  display: inline-block;
+  background: var(--green-bg);
+  color: var(--green-text);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 2px 9px;
+  border-radius: 99px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.step-detail {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  line-height: 1.9;
+  min-height: 110px;
+}
+.step-detail .lbl { color: var(--text3); }
+.step-detail .hl  { color: var(--blue-text); font-weight: 700; }
+
+.result-box { display: none; }
+.result-box.show { display: block; }
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+.result-row:last-child { border-bottom: none; }
+.result-row .k { color: var(--text2); }
+.result-row .v { font-family: var(--mono); font-weight: 700; color: var(--text); }
+.result-row.hl .v { color: var(--blue-text); font-size: 1.1em; }
+
+.footnote {
+  margin-top: 2rem;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.6;
+  max-width: 760px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="intro">
+  <div class="intro-headline">Simulador de <em>Repasse do PNAE</em></div>
+  <div class="intro-sub">
+    O <strong>PNAE</strong> (Programa Nacional de Alimentação Escolar) repassa às escolas um valor
+    <strong>per capita, por dia letivo, por modalidade de ensino</strong>. Este simulador reproduz o modelo
+    construído em Excel para o Projeto 1 de Análise de Dados para Pesquisas em Políticas Públicas (FGV EAESP):
+    a partir das matrículas de uma escola, ele calcula o <strong>porte</strong>, o <strong>repasse anual estimado</strong>
+    e a <strong>elegibilidade para complementação municipal</strong>, além de simular variações nas matrículas.
+  </div>
+  <div class="example-box">
+    <strong>Escola e matrículas fictícias</strong>, criadas para fins didáticos. Os valores per capita, os dias
+    letivos e a regra de cálculo do repasse são reais (Resolução CD/FNDE nº 1, de 18 de fevereiro de 2026, que
+    altera a Resolução CD/FNDE nº 6/2020 — reajuste médio de 14,35% em relação a 2025). O bairro é real, no
+    município de Osasco/SP.
+  </div>
+</div>
+
+<!-- ── PARÂMETROS DO PNAE ── -->
+<div class="card">
+  <div class="card-title">Parâmetros do PNAE — 2026 (referência)</div>
+  <div class="ref-two-col">
+    <div>
+      <table class="ref-table">
+        <thead><tr><th>Modalidade</th><th class="num">Valor per capita (R$/dia)</th></tr></thead>
+        <tbody id="ref-modalidades"></tbody>
+      </table>
+    </div>
+    <div>
+      <table class="ref-table">
+        <thead><tr><th>Faixas de porte da escola</th><th class="num">Matrículas (mínimo)</th></tr></thead>
+        <tbody id="ref-faixas"></tbody>
+      </table>
+      <table class="ref-table" style="margin-top:14px;">
+        <tbody>
+          <tr><td>Dias letivos (ano)</td><td class="num">200</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="source-note">
+    Fonte: Resolução CD/FNDE nº 1/2026 (altera a Resolução CD/FNDE nº 6/2020). Faixas de porte criadas para
+    fins didáticos deste curso.
+  </div>
+</div>
+
+<!-- ── DADOS DA ESCOLA ── -->
+<div class="card">
+  <div class="card-title">Dados da escola</div>
+  <div class="school-grid">
+    <div class="school-field"><div class="k">Nome da escola (fictício)</div><div class="v">EMEB Vila Quitaúna</div></div>
+    <div class="school-field"><div class="k">Bairro</div><div class="v">Quitaúna</div></div>
+    <div class="school-field"><div class="k">Município</div><div class="v">Osasco/SP</div></div>
+  </div>
+</div>
+
+<!-- ── MATRÍCULAS E CÁLCULO AUTOMÁTICO ── -->
+<div class="card">
+  <div class="card-title">Matrículas por modalidade (ano letivo projetado) — edite os valores</div>
+  <table class="enroll-table">
+    <thead>
+      <tr><th>Modalidade</th><th class="num">Matrículas</th><th class="num">Valor per capita (R$/dia)</th></tr>
+    </thead>
+    <tbody id="enroll-body"></tbody>
+    <tfoot>
+      <tr class="total-row">
+        <td>Total de Matrículas</td>
+        <td class="num" id="out-total">—</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="results-grid">
+    <div class="result-tile">
+      <div class="k">Porte da escola</div>
+      <div class="v" id="out-porte">—</div>
+      <div class="formula-hint">PROCV aprox. em Parametros_PNAE!A17:B19</div>
+    </div>
+    <div class="result-tile hl">
+      <div class="k">Repasse anual estimado</div>
+      <div class="v" id="out-repasse">—</div>
+      <div class="formula-hint">SOMARPRODUTO × dias letivos</div>
+    </div>
+    <div class="result-tile" id="out-elig-tile">
+      <div class="k">Elegibilidade — complementação municipal</div>
+      <div class="v" id="out-elig">—</div>
+      <div class="formula-hint">SE(OU(Porte="Pequena"; Total&lt;150))</div>
+    </div>
+    <div class="result-tile">
+      <div class="k">Dias letivos</div>
+      <div class="v">200</div>
+      <div class="formula-hint">Parametros_PNAE!B13</div>
+    </div>
+  </div>
+  <div class="card-note">
+    Regra de elegibilidade criada apenas para praticar SE aninhado com E/OU no exercício; não reproduz nenhum
+    critério oficial de complementação municipal.
+  </div>
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <span class="divider-label">Simule com o fator de ajuste</span>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ── MODELO DE SIMULAÇÃO (fator de ajuste, tempo real) ── -->
+<div class="param-card">
+  <div class="card-title">Modelo para simulação</div>
+  <div class="param-grid">
+    <div class="field">
+      <label for="in-fator">Fator de ajuste <span class="hint">ex.: 0,15 = +15%</span></label>
+      <input type="number" id="in-fator" value="0.15" step="0.01">
+    </div>
+    <div class="status" style="align-self:center;">
+      Aplicado sobre cada modalidade: <span class="hl" style="font-family:var(--mono); color:var(--blue-text); font-weight:700;">Matrículas Ajustadas = Matrículas × (1 + Fator)</span>
+    </div>
+  </div>
+
+  <table class="adj-table">
+    <thead>
+      <tr><th>Modalidade</th><th>Matrículas</th><th>Matrículas ajustadas</th><th>Per capita (R$)</th></tr>
+    </thead>
+    <tbody id="adj-body"></tbody>
+    <tfoot>
+      <tr class="total">
+        <td>Total de Matrículas e Repasse</td>
+        <td></td>
+        <td id="adj-total-matr">—</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="tot-box">
+    <span class="tot-label">Repasse ajustado (SOMARPRODUTO × dias letivos) =</span>
+    <span class="tot-val" id="adj-repasse">—</span>
+  </div>
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <span class="divider-label">Tabela de dados — cenários de variação</span>
+  <div class="divider-line"></div>
+</div>
+
+<div class="example-box">
+  Reproduz a <strong>Tabela de Dados</strong> do Excel (Dados → Teste de Hipótese → Tabela de Dados, variando a
+  célula do Fator de Ajuste de −20% a +20%, em passos de 5%). Clique em <strong>"Calcular próximo cenário"</strong>
+  para reconstruir a tabela linha a linha, como no arquivo original — a base usada é o total de matrículas e o
+  repasse calculados acima a partir dos valores que você editou.
+</div>
+
+<div class="sim-grid">
+
+  <div class="card">
+    <div class="card-title">Tabela de resultados (A39:C48 da planilha)</div>
+    <div class="scenario-table-box">
+      <table class="scenario-table" id="scenario-table" style="display:none;">
+        <thead>
+          <tr><th>Fator de variação</th><th>Matrículas (total)</th><th>Repasse ajustado (R$)</th></tr>
+        </thead>
+        <tbody id="scenario-body"></tbody>
+      </table>
+      <div class="scenario-placeholder" id="scenario-placeholder">
+        Clique em "Calcular base e reiniciar" para começar a reconstruir os 9 cenários da Tabela de Dados.
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="resetScenarios()">&#x21BA; Calcular base e reiniciar</button>
+      <button class="btn primary" id="btn-step" onclick="stepScenario()" disabled>Calcular próximo cenário &rarr;</button>
+    </div>
+    <div class="status" id="scenario-status">Clique em "Calcular base e reiniciar" para usar as matrículas atuais como base dos cenários.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Cenário em processamento</div>
+    <div class="step-detail" id="scenario-detail">Nenhum cenário calculado ainda.</div>
+
+    <div class="result-box" id="scenario-result-box">
+      <div class="card-title">Amplitude dos cenários calculados</div>
+      <div class="result-row"><span class="k">Menor repasse (fator −20%)</span><span class="v" id="res-min">—</span></div>
+      <div class="result-row hl"><span class="k">Repasse na base (fator 0%)</span><span class="v" id="res-base">—</span></div>
+      <div class="result-row"><span class="k">Maior repasse (fator +20%)</span><span class="v" id="res-max">—</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footnote">
+  Simulador construído a partir do arquivo Simulador_PNAE.xlsx (abas Parametros_PNAE e Simulador_Escola),
+  produzido para o Projeto 1 do curso Análise de Dados para Pesquisas em Políticas Públicas (FGV EAESP).
+  Escola e matrículas são fictícias; valores per capita, dias letivos e fórmulas seguem o modelo original da planilha.
+</div>
+
+</div>
+
+<script>
+/* ============================================================
+   DADOS — extraídos de Parametros_PNAE e Simulador_Escola
+   ============================================================ */
+var MODALIDADES = [
+  { key: 'creche',   label: 'Creche',               percapita: 1.57, base: 60 },
+  { key: 'pre',      label: 'Pré-escola',           percapita: 0.82, base: 80 },
+  { key: 'fund',     label: 'Fundamental',          percapita: 0.57, base: 50 },
+  { key: 'medio',    label: 'Médio',                percapita: 0.57, base: 0 },
+  { key: 'eja',      label: 'EJA',                   percapita: 0.57, base: 0 },
+  { key: 'indigena', label: 'Indígena/Quilombola',  percapita: 0.98, base: 0 },
+  { key: 'aee',      label: 'AEE (contraturno)',    percapita: 0.78, base: 0 }
+];
+
+var DIAS_LETIVOS = 200; // Parametros_PNAE!B13
+
+var FAIXAS_PORTE = [ // Parametros_PNAE!A17:B19 (ordenado, para PROCV aproximado)
+  { min: 0,   porte: 'Pequena' },
+  { min: 201, porte: 'Média' },
+  { min: 401, porte: 'Grande' }
+];
+
+var FATORES_CENARIO = [-0.20, -0.15, -0.10, -0.05, 0, 0.05, 0.10, 0.15, 0.20]; // linha A40:A48
+
+/* ============================================================
+   FUNÇÕES QUE REPRODUZEM AS FÓRMULAS DA PLANILHA
+   ============================================================ */
+
+// PROCV exato: busca o valor per capita de uma modalidade (=VLOOKUP(A10,Parametros_PNAE!$A$5:$B$11,2,FALSE))
+function procvPerCapita(key) {
+  for (var i = 0; i < MODALIDADES.length; i++) {
+    if (MODALIDADES[i].key === key) return MODALIDADES[i].percapita;
+  }
+  return 0;
+}
+
+// PROCV aproximado: classifica o porte pela faixa (=VLOOKUP(B17,Parametros_PNAE!$A$17:$B$19,2,TRUE()))
+function procvPorte(total) {
+  var resultado = FAIXAS_PORTE[0].porte;
+  for (var i = 0; i < FAIXAS_PORTE.length; i++) {
+    if (total >= FAIXAS_PORTE[i].min) resultado = FAIXAS_PORTE[i].porte;
+    else break;
+  }
+  return resultado;
+}
+
+// SOMARPRODUTO: soma dos produtos matrícula × per capita (=SUMPRODUCT(B10:B16,C10:C16))
+function somarProduto(vals, percapitas) {
+  var s = 0;
+  for (var i = 0; i < vals.length; i++) s += vals[i] * percapitas[i];
+  return s;
+}
+
+// SE aninhado com OU: elegibilidade para complementação municipal
+// (=IF(OR(B19="Pequena", B17<150), "Recebe Complementação", "Não Recebe"))
+function elegibilidade(porte, total) {
+  if (porte === 'Pequena' || total < 150) return 'Recebe Complementação';
+  return 'Não Recebe';
+}
+
+function fmtBRL(v) {
+  return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+function fmtNum1(v) {
+  return v.toLocaleString('pt-BR', { minimumFractionDigits: v % 1 === 0 ? 0 : 1, maximumFractionDigits: 1 });
+}
+function fmtFator(f) {
+  var pct = (f * 100).toFixed(0);
+  return (f >= 0 ? '+' : '') + pct + '%';
+}
+
+/* ============================================================
+   RENDER — tabela de referência (Parametros_PNAE)
+   ============================================================ */
+function renderReferencia() {
+  var tbody = document.getElementById('ref-modalidades');
+  tbody.innerHTML = '';
+  MODALIDADES.forEach(function (m) {
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + m.label + '</td><td class="num">' + m.percapita.toLocaleString('pt-BR', {minimumFractionDigits:2}) + '</td>';
+    tbody.appendChild(tr);
+  });
+
+  var tbodyF = document.getElementById('ref-faixas');
+  tbodyF.innerHTML = '';
+  var labels = ['Pequena (0 a 200)', 'Média (201 a 400)', 'Grande (a partir de 401)'];
+  FAIXAS_PORTE.forEach(function (f, idx) {
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + f.porte + '</td><td class="num">' + f.min + '</td>';
+    tbodyF.appendChild(tr);
+  });
+}
+
+/* ============================================================
+   RENDER — tabela editável de matrículas + cálculo automático
+   ============================================================ */
+function renderEnrollTable() {
+  var tbody = document.getElementById('enroll-body');
+  tbody.innerHTML = '';
+  MODALIDADES.forEach(function (m) {
+    var tr = document.createElement('tr');
+    var tdLabel = document.createElement('td');
+    tdLabel.textContent = m.label;
+    tr.appendChild(tdLabel);
+
+    var tdInput = document.createElement('td');
+    tdInput.className = 'num';
+    var input = document.createElement('input');
+    input.type = 'number';
+    input.min = '0';
+    input.step = '1';
+    input.value = m.base;
+    input.id = 'matricula-' + m.key;
+    input.addEventListener('input', recalcAll);
+    tdInput.appendChild(input);
+    tr.appendChild(tdInput);
+
+    var tdPc = document.createElement('td');
+    tdPc.className = 'percapita';
+    tdPc.textContent = 'R$ ' + m.percapita.toLocaleString('pt-BR', {minimumFractionDigits:2});
+    tr.appendChild(tdPc);
+
+    tbody.appendChild(tr);
+  });
+}
+
+function lerMatriculas() {
+  return MODALIDADES.map(function (m) {
+    var el = document.getElementById('matricula-' + m.key);
+    var v = parseFloat(el.value);
+    return isNaN(v) || v < 0 ? 0 : v;
+  });
+}
+
+function recalcAll() {
+  var matriculas = lerMatriculas();
+  var percapitas = MODALIDADES.map(function (m) { return procvPerCapita(m.key); });
+
+  var total = matriculas.reduce(function (a, b) { return a + b; }, 0);
+  var porte = procvPorte(total);
+  var repasse = somarProduto(matriculas, percapitas) * DIAS_LETIVOS;
+  var elig = elegibilidade(porte, total);
+
+  document.getElementById('out-total').textContent = fmtNum1(total);
+  document.getElementById('out-porte').textContent = porte;
+  document.getElementById('out-repasse').textContent = fmtBRL(repasse);
+  document.getElementById('out-elig').textContent = elig;
+
+  var eligTile = document.getElementById('out-elig-tile');
+  eligTile.classList.remove('elig-yes', 'elig-no');
+  eligTile.classList.add(elig === 'Recebe Complementação' ? 'elig-yes' : 'elig-no');
+
+  recalcAjuste();
+}
+
+/* ============================================================
+   MODELO DE SIMULAÇÃO — fator de ajuste, tempo real
+   ============================================================ */
+function renderAdjTable(matriculas, percapitas, fator) {
+  var tbody = document.getElementById('adj-body');
+  tbody.innerHTML = '';
+  var totalAjustado = 0;
+  MODALIDADES.forEach(function (m, i) {
+    var ajustada = matriculas[i] * (1 + fator);
+    totalAjustado += ajustada;
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td style="text-align:left;">' + m.label + '</td>' +
+      '<td>' + fmtNum1(matriculas[i]) + '</td>' +
+      '<td>' + fmtNum1(ajustada) + '</td>' +
+      '<td>' + percapitas[i].toLocaleString('pt-BR', {minimumFractionDigits:2}) + '</td>';
+    tbody.appendChild(tr);
+  });
+  return totalAjustado;
+}
+
+function recalcAjuste() {
+  var fatorInput = parseFloat(document.getElementById('in-fator').value);
+  var fator = isNaN(fatorInput) ? 0 : fatorInput;
+  var matriculas = lerMatriculas();
+  var percapitas = MODALIDADES.map(function (m) { return procvPerCapita(m.key); });
+
+  var ajustadas = matriculas.map(function (v) { return v * (1 + fator); });
+  var totalAjustado = renderAdjTable(matriculas, percapitas, fator);
+  var repasseAjustado = somarProduto(ajustadas, percapitas) * DIAS_LETIVOS;
+
+  document.getElementById('adj-total-matr').textContent = fmtNum1(totalAjustado);
+  document.getElementById('adj-repasse').textContent = fmtBRL(repasseAjustado);
+}
+
+/* ============================================================
+   TABELA DE DADOS — simulação passo a passo dos 9 cenários
+   ============================================================ */
+var scenarioSteps = [];
+var scenarioIdx = 0;
+
+function buildScenarioSteps() {
+  var matriculas = lerMatriculas();
+  var percapitas = MODALIDADES.map(function (m) { return procvPerCapita(m.key); });
+
+  return FATORES_CENARIO.map(function (fator) {
+    var ajustadas = matriculas.map(function (v) { return v * (1 + fator); });
+    var totalMatr = ajustadas.reduce(function (a, b) { return a + b; }, 0);
+    var repasse = somarProduto(ajustadas, percapitas) * DIAS_LETIVOS;
+    return { fator: fator, totalMatr: totalMatr, repasse: repasse };
+  });
+}
+
+function resetScenarios() {
+  scenarioSteps = buildScenarioSteps();
+  scenarioIdx = 0;
+
+  document.getElementById('scenario-body').innerHTML = '';
+  document.getElementById('scenario-table').style.display = 'none';
+  document.getElementById('scenario-placeholder').style.display = 'block';
+  document.getElementById('scenario-placeholder').textContent =
+    'Base recalculada com as matrículas atuais. Clique em "Calcular próximo cenário" para reconstruir a tabela, do fator −20% ao +20%.';
+  document.getElementById('scenario-detail').textContent = 'Nenhum cenário calculado ainda.';
+  document.getElementById('scenario-status').innerHTML =
+    'Base pronta. Clique em <strong>"Calcular próximo cenário"</strong> para começar, do menor fator ao maior.';
+  document.getElementById('btn-step').disabled = false;
+  document.getElementById('scenario-result-box').classList.remove('show');
+}
+
+function stepScenario() {
+  if (scenarioIdx >= scenarioSteps.length) return;
+
+  if (scenarioIdx === 0) {
+    document.getElementById('scenario-placeholder').style.display = 'none';
+    document.getElementById('scenario-table').style.display = 'table';
+  }
+
+  var s = scenarioSteps[scenarioIdx];
+
+  // remove destaque "current" da linha anterior
+  var prevRows = document.querySelectorAll('#scenario-body tr.current');
+  prevRows.forEach(function (r) { r.classList.remove('current'); });
+
+  var tr = document.createElement('tr');
+  tr.className = 'current' + (s.fator === 0 ? ' base' : '');
+  tr.innerHTML = '<td>' + fmtFator(s.fator) + '</td>' +
+    '<td>' + fmtNum1(s.totalMatr) + '</td>' +
+    '<td>' + fmtBRL(s.repasse) + '</td>';
+  document.getElementById('scenario-body').appendChild(tr);
+
+  document.getElementById('scenario-detail').innerHTML =
+    '<span class="lbl">Fator de variação:</span> <span class="hl">' + fmtFator(s.fator) + '</span><br>' +
+    '<span class="lbl">Matrículas ajustadas (total):</span> ' + fmtNum1(s.totalMatr) + '<br>' +
+    '<span class="lbl">Repasse ajustado:</span> SOMARPRODUTO(matrículas×(1+fator), per capita) × 200 = <span class="hl">' + fmtBRL(s.repasse) + '</span>';
+
+  document.getElementById('scenario-status').innerHTML =
+    'Cenário ' + (scenarioIdx + 1) + ' de ' + scenarioSteps.length + ' calculado: fator <strong>' + fmtFator(s.fator) +
+    '</strong> &rarr; repasse <strong>' + fmtBRL(s.repasse) + '</strong>.';
+
+  scenarioIdx++;
+
+  if (scenarioIdx >= scenarioSteps.length) {
+    document.getElementById('btn-step').disabled = true;
+    document.getElementById('scenario-status').innerHTML =
+      '<span class="done-badge">&#10003; Concluído</span> Os 9 cenários da Tabela de Dados foram reconstruídos.';
+
+    var min = scenarioSteps[0];
+    var base = scenarioSteps.filter(function (x) { return x.fator === 0; })[0];
+    var max = scenarioSteps[scenarioSteps.length - 1];
+    document.getElementById('res-min').textContent = fmtBRL(min.repasse);
+    document.getElementById('res-base').textContent = fmtBRL(base.repasse);
+    document.getElementById('res-max').textContent = fmtBRL(max.repasse);
+    document.getElementById('scenario-result-box').classList.add('show');
+  }
+}
+
+document.getElementById('in-fator').addEventListener('input', recalcAjuste);
+
+/* init */
+renderReferencia();
+renderEnrollTable();
+recalcAll();
+</script>
+</body>
+</html>
