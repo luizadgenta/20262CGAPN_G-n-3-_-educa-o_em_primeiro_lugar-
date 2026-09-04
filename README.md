@@ -18,7 +18,7 @@ O projeto apresenta:
 
 ## Como utilizar
 
-1. Baixe o arquivo `Censo_Escolar.xlsx`.
+1. Baixe o arquivo `Painel do Censo Escola`.
 2. Abra a planilha no Microsoft Excel.
 3. Consulte a base de dados tratada.
 4. Utilize as tabelas dinâmicas para analisar as informações.
@@ -29,7 +29,7 @@ O projeto apresenta:
 
 ### Disclaimer 1 — Fonte dos dados
 
-Os dados utilizados são provenientes da base do Censo Escolar disponibilizada para a realização do projeto.
+Os dados utilizados são provenientes da base do painel do Censo Escola disponibilizada para a realização do projeto.
 
 ### Disclaimer 2 — Tratamento dos dados
 
@@ -41,5 +41,6 @@ Este projeto possui finalidade exclusivamente acadêmica e não deve ser utiliza
 
 ## Arquivos
 
-- `Censo_Escolar.xlsx` — planilha com a base tratada, análises, tabelas dinâmicas, gráficos e dashboard.
+- `painel do Censo Escola<img width="1001" height="81" alt="image" src="https://github.com/user-attachments/assets/159bf93a-d1d9-4b47-8da6-98113ce1575f" />
+` — planilha com a base tratada, análises, tabelas dinâmicas, gráficos e dashboard.
 - `README.md` — apresentação do projeto e instruções de utilização.
