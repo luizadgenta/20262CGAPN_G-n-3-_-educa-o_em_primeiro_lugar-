@@ -40,6 +40,12 @@ O que foi ajustado manualmente:
 
 Após a resposta do Claude, concluímos que não era necessário fazer nenhum ajuste do HTML
 
+## Fonte de dados 
+
+Fonte oficial: Resolução CD/FNDE nº 1/2026, ou Censo Escolar 2024 (INEP) 
+Link oficial: https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2026/resolucao-cd_fnde-no-1-de-18-de-fevereiro-de-2026-dou-imprensa-nacional.pdf/view
+O que os dados representam: descrever em 2-3 frases 
+Estrutura: principais colunas/variáveis usadas e o que cada uma significa
 
 ## Participação do Grupo
 
