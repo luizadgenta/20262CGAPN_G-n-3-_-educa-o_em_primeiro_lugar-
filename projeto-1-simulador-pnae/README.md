@@ -43,9 +43,12 @@ Após a resposta do Claude, concluímos que não era necessário fazer nenhum aj
 ## Fonte de dados 
 
 Fonte oficial: Resolução CD/FNDE nº 1/2026, ou Censo Escolar 2024 (INEP) 
+
 Link oficial: https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2026/resolucao-cd_fnde-no-1-de-18-de-fevereiro-de-2026-dou-imprensa-nacional.pdf/view
-O que os dados representam: descrever em 2-3 frases 
-Estrutura: principais colunas/variáveis usadas e o que cada uma significa
+
+O que os dados representam: São dados dos parâmetros do PNAE de 2026 que representam o repasse do PNAE para cada modalidade de escola, além disso com a planilha criada é possível simular esse repasse com um aumento percentual qualquer afim de analisar o que aconteceria para cada caso. 
+
+Estrutura: colunas de modalidade de cada escola, valor per capita por dia, matrículas por porte de escola e além da quantidade de dias letivos por ano. O simulador consiste nesses dados além de uma fórmula de soma produto que calcula o aumento percentual em cada modalidade. 
 
 ## Participação do Grupo
 
