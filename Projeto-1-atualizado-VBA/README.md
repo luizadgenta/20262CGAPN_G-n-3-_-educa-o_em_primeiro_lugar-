@@ -58,8 +58,7 @@ Para ver o código, abra o editor do VBA com **Alt + F11** e acesse o módulo `m
 
 
 **Papel de cada integrante neste projeto:**
-- Beatriz Apóstolo Della Nina: *(README)*
-- Luiza Dias Genta: *(implementação do campo Usuário em VBA, formatação da planilha e testes)*
+- Luiza Dias Genta: *(implementação do campo Usuário em VBA, formatação da planilha, README e testes)*
 - Demais integrantes: *(ajudaram a tirar duvidas sobre algumas questões do trabalho além de acompanharem o andamento do projeto)*
 
 
