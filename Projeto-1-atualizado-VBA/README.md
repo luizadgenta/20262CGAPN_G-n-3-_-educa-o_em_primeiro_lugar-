@@ -35,7 +35,7 @@ Para ver o código, abra o editor do VBA com **Alt + F11** e acesse o módulo `m
 
 ## Disclaimers
 
-### Disclaimer 1 — Uso de Inteligência Artificial
+### Uso de Inteligência Artificial
 
 **Ferramenta utilizada:** Claude (Anthropic).
 
@@ -50,12 +50,9 @@ Para ver o código, abra o editor do VBA com **Alt + F11** e acesse o módulo `m
 
 ### Dados
 
-- **Valores per capita e dias letivos:** parâmetros do PNAE de 2026, conforme a Resolução CD/FNDE nº 1, de 18 de fevereiro de 2026, que altera a Resolução CD/FNDE nº 6/2020.
+- parâmetros do PNAE de 2026, conforme a Resolução CD/FNDE nº 1, de 18 de fevereiro de 2026, que altera a Resolução CD/FNDE nº 6/2020.
   Link: https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2026/resolucao-cd_fnde-no-1-de-18-de-fevereiro-de-2026-dou-imprensa-nacional.pdf/view
-- **Escola e matrículas:** fictícias, criadas para fins didáticos (EMEB Vila Quitaúna, em Quitaúna, Osasco/SP; o bairro é real).
-- **Faixas de porte da escola e regra de elegibilidade para complementação municipal:** criadas apenas para praticar funções do Excel (PROCV, SE aninhado com E/OU). Não reproduzem nenhum critério oficial.
-- **Banco de Dados de simulações:** os registros presentes no arquivo são testes feitos pelo grupo e não representam resultados reais.
-- Este projeto tem finalidade exclusivamente acadêmica e não deve ser usado como fonte oficial para decisões orçamentárias sem verificação dos dados originais.
+
 
 ### Participação do grupo
 
