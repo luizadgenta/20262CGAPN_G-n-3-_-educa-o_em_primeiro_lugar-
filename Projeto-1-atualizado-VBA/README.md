@@ -1,4 +1,4 @@
-# Projeto 1 (atualizado) — Simulador de Repasse do PNAE com automação em VBA
+# Simulador de Repasse do PNAE com automação em VBA
 
 ## Objetivo
 
