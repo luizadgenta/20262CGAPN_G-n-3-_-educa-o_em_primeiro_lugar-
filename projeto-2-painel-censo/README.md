@@ -48,6 +48,6 @@ Terminei de formatar a planilha do excel e finalizei o dash da educação.
 
 ## Arquivos
 
-- `painel do Censo Escola<img width="1001" height="81" alt="image" src="https://github.com/user-attachments/assets/159bf93a-d1d9-4b47-8da6-98113ce1575f" />
+- microdados_ed_basica_2024_DADOS_SP (1).xlsx width="1001" height="81" alt="image" src="https://github.com/user-attachments/assets/159bf93a-d1d9-4b47-8da6-98113ce1575f" />
 ` — planilha com a base tratada, análises, tabelas dinâmicas, gráficos e dashboard.
 - `README.md` — apresentação do projeto e instruções de utilização.
