@@ -47,7 +47,7 @@ A lógica de tratamento é a mesma da versão anterior. O que muda é o volume d
 
 1. **Fonte de dados:** os dados são públicos e pertencem ao **INEP (Censo Escolar da Educação Básica 2024)**. Este projeto não é oficial e não representa o INEP ou o Ministério da Educação. Os números exibidos dependem da versão da base utilizada e podem diferir de publicações oficiais posteriores.
 2. **Participação**: Luiza Dias Genta fez toda parte do excel (power query), demais participantes ajudaram a tirar eventuais duvidas 
-3. **Uso de IA:** Claude foi usado para assistência em dúvidas de erros que estavam ocorrendo durante o trabalho. 
+3. **Uso de IA:** Claude foi usado para assistência em dúvidas de erros que estavam ocorrendo durante o trabalho e explicação de algumas etapas do trabalho. 
 
 ---
 ## Nota de esclarecimento sobre o formato do arquivo: 
