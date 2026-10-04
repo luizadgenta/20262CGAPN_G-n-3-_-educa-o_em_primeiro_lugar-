@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Este projeto tem como objetivo organizar, tratar e analisar dados do Censo Escolar, utilizando ferramentas do Excel para facilitar a interpretação das informações.
+Este projeto organiza, trata e analisa dados do Censo Escolar usando ferramentas do Excel, para facilitar a leitura das informações sobre as escolas. O resultado é um painel (dashboard) com tabelas dinâmicas, gráfico dinâmico e segmentação de dados, que permite filtrar e comparar as escolas de forma rápida e visual.
 
 ## O que foi desenvolvido
 
@@ -17,12 +17,11 @@ O projeto apresenta:
 
 ## Como utilizar
 
-1. Baixe o arquivo `Painel do Censo Escola`.
-2. Abra a planilha no Microsoft Excel.
-3. Consulte a base de dados tratada.
-4. Utilize as tabelas dinâmicas para analisar as informações.
-5. Utilize a segmentação de dados para realizar diferentes filtros.
-6. Consulte o Dashboard para visualizar os principais resultados.
+1. Baixe o arquivo microdados_ed_basica_2024_DADOS_SP (1).xlsx e abra no Microsoft Excel.
+Consulte a aba da base de dados tratada, que contém as colunas calculadas com SE e PROCV.
+Nas tabelas dinâmicas, analise as informações por diferentes recortes.
+Use a segmentação de dados para aplicar filtros. O gráfico dinâmico e o painel se atualizam conforme a seleção.
+Consulte o Dashboard para ver os principais resultados em uma única tela.
 
 ## Disclaimers
 
@@ -37,6 +36,10 @@ Os dados foram tratados e organizados para fins acadêmicos e de análise, poden
 ### Disclaimer 3 — Finalidade
 
 Este projeto possui finalidade exclusivamente acadêmica e não deve ser utilizado como fonte oficial para tomada de decisões sem a verificação dos dados originais.
+
+### Disclaimer 4 - Uso de IA
+
+Não utilizamos IA nesse projeto 
 
 ## Participação 
 
