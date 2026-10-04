@@ -50,5 +50,4 @@ Construir um painel completo e reutilizável do Censo Escolar que:
 
 ---
 ## Nota de esclarecimento sobre o formato do arquivo: 
-O arquivo excel era muito pesado e não foi possível subir no github por isso optamos por enviar o link de uma pasta em uma nuvem para que fosse possível acessar o tra[links projeto 2.pdf](https://github.com/user-attachments/files/33037514/links.projeto.2.pdf)
-balho 
+O arquivo excel era muito pesado e não foi possível subir no github por isso optamos por enviar o link de uma pasta em uma nuvem para que fosse possível acessar o trabalho. 
