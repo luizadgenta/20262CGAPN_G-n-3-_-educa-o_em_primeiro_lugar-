@@ -5,7 +5,19 @@ Objetivo:
 O projeto calcula os valores dos repasses financeiros do Programa Nacional de Alimentação Escolar (PNAE) com base em informações configuráveis, testando quanto dinheiro é direcionado para cada tipo de escola. Ele serve como uma ferramenta para estimar recursos e apoiar a análise orçamentária na política pública de alimentação escolar.
 
 Como usar:
+Planilha Excel (Simulador_PNAE.xlsx)
 
+Abra o arquivo no Microsoft Excel.
+Na aba Parametros_PNAE, consulte os valores per capita por modalidade, os dias letivos e as faixas de porte da escola (não precisa alterar).
+Na aba Simulador_Escola, edite o número de matrículas de cada modalidade. O total de matrículas, o porte da escola, o repasse anual estimado e a elegibilidade para complementação municipal são calculados automaticamente.
+Na seção "Modelo para Simulação", altere o Fator de Ajuste (por exemplo, 0,15 para +15%) e veja as matrículas ajustadas e o repasse ajustado.
+A Tabela de Dados (A39:C48) mostra o resultado para fatores de -20% a +20%, em passos de 5%.
+
+Artefato HTML (Simulador_PNAE.html)
+
+Baixe o arquivo e abra no navegador (Chrome, Edge ou Firefox). Não precisa de internet nem de instalação.
+Edite as matrículas e o fator de ajuste. Os resultados mudam em tempo real.
+Na seção "Tabela de dados", clique em Calcular base e reiniciar e depois em Calcular próximo cenário para reconstruir os 9 cenários, um por vez.
 
 Prints do resultado:
 <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/704cef3f-e0e3-4de9-9372-3becd4e726f4" />
