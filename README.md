@@ -14,6 +14,8 @@ Este repositório reúne os dois projetos desenvolvidos pelo grupo em Excel, amb
 
 - [`projeto-1-simulador-pnae`](./projeto-1-simulador-pnae) — planilha, simulador HTML e README do Projeto 1.
 - [`projeto-2-painel-censo`](./projeto-2-painel-censo) — planilha com o painel e README do Projeto 2.
+- projeto-1-atualizado-VBA
+- projeto-2-atualizado
 
 Cada pasta tem seu próprio README, com objetivo, instruções de uso e os disclaimers de uso de IA, fonte de dados e participação.
 
@@ -25,10 +27,4 @@ Cada pasta tem seu próprio README, com objetivo, instruções de uso e os discl
 - Luiza Dias Genta
 - Rafaela Panca
 
-## Contribuição de cada integrante
 
-- **Beatriz Apóstolo Della Nina e Luiza Dias Genta:** Projeto 1.
-- **Liliana Palhares Souza e Luiza Dias Genta:** Projeto 2.
-- **Liz Vilibor:** organização das pastas do repositório.
-- **Luiza Dias Genta:** criação do repositório e inclusão dos colaboradores.
-- **Rafaela Panca:** reuniu os prints e arrumou arquivo para entrega no eClass.
