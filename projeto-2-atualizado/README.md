@@ -25,7 +25,8 @@ Construir um painel completo e reutilizável do Censo Escolar que:
 
 ---
 
-
+## O que mudou da versão anterior:
+A lógica de tratamento é a mesma da versão anterior. O que muda é o volume de dados e o momento em que o filtro é aplicado: como a junção interna com a tabela de filtro acontece no Power Query, o painel final trabalha somente com os dados do município escolhido, mesmo partindo da base nacional.
 
 ## Como usar
 
