@@ -30,11 +30,25 @@ Ao mudar qualquer filtro, tudo se recalcula: indicadores, gráficos, mapa e list
 
 Todas as regiões, sem filtros:
 
-![Painel com todas as regiões](prints/painel_todas_regioes.png)
+<img width="593" height="371" alt="Screenshot 2026-11-13 091714" src="https://github.com/user-attachments/assets/e5382b1f-41b0-4c3e-bf38-ae026d56186e" />
+<img width="548" height="319" alt="Screenshot 2026-11-13 091721" src="https://github.com/user-attachments/assets/3e6b1d0f-e377-4acf-b728-71350e2e171e" />
+<img width="554" height="313" alt="Screenshot 2026-11-13 091729" src="https://github.com/user-attachments/assets/dccecc50-7a6e-4a64-a231-bb4c9f2f3bc5" />
+<img width="542" height="307" alt="Screenshot 2026-11-13 091736" src="https://github.com/user-attachments/assets/4683b006-c006-4dc9-8b1e-bec61464eb06" />
+<img width="548" height="313" alt="Screenshot 2026-11-13 091743" src="https://github.com/user-attachments/assets/68a93488-8f65-472f-b591-e46bf8a4b57f" />
+<img width="550" height="433" alt="Screenshot 2026-11-13 091752" src="https://github.com/user-attachments/assets/404dc3b3-631f-4332-b1e0-47658767665d" />
+<img width="554" height="385" alt="Screenshot 2026-11-13 091759" src="https://github.com/user-attachments/assets/5f8c0fcc-91be-4093-ad4f-a97a228d45e4" />
+
 
 Vale do Ribeira selecionado:
 
-![Painel com o Vale do Ribeira](prints/painel_vale_do_ribeira.png)
+<img width="546" height="361" alt="Screenshot 2026-11-13 092108" src="https://github.com/user-attachments/assets/5ee49f01-03a8-4468-b489-0eccb11673da" />
+<img width="525" height="324" alt="Screenshot 2026-11-13 092114" src="https://github.com/user-attachments/assets/3bf5373c-74da-4aa4-b0fe-f6451df9d6c4" />
+<img width="529" height="322" alt="Screenshot 2026-11-13 092123" src="https://github.com/user-attachments/assets/23470cf0-55ce-4c21-bb7c-a7830b306ade" />
+<img width="533" height="314" alt="Screenshot 2026-11-13 092133" src="https://github.com/user-attachments/assets/242cebb4-7953-4592-ad5a-045c6c89e167" />
+<img width="533" height="315" alt="Screenshot 2026-11-13 092140" src="https://github.com/user-attachments/assets/19f41ca0-6f97-4e5e-bd4e-5bf8d0303556" />
+<img width="555" height="425" alt="Screenshot 2026-11-13 092148" src="https://github.com/user-attachments/assets/4307a010-53b8-4764-8add-b008df28d7d4" />
+<img width="550" height="353" alt="Screenshot 2026-11-13 092206" src="https://github.com/user-attachments/assets/b77750af-e725-4e74-8198-b70a5de0756f" />
+
 
 ## Elementos do painel
 
