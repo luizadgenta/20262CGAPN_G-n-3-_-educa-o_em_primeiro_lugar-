@@ -78,7 +78,7 @@ Não utilizamos inteligência artificial para fazer esse projeto.
 
 **Fonte oficial:** Censo Escolar da Educação Básica 2024 (INEP).
 
-**Link oficial:** https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-escolar *(conferir se o link abre antes de publicar)*
+**Link oficial:** https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-escolar 
 
 **O que os dados representam:** o Censo Escolar é o principal levantamento anual sobre as escolas de educação básica do país, feito pelo INEP. A base usada aqui (`escolas_sp_regioes_2024_geo.csv`) é um recorte fornecido na disciplina, com as escolas em atividade de 30 municípios de quatro regiões do estado de São Paulo, com suas características, infraestrutura e coordenadas geográficas. Este painel não é oficial e não representa o INEP nem o Ministério da Educação.
 
@@ -99,12 +99,14 @@ Não utilizamos inteligência artificial para fazer esse projeto.
 
 ## Participação do Grupo
 
-**O que aprendemos com este projeto:** *[DESCREVER.]*
+**O que aprendemos com este projeto:** 
+
+Ao realizar esse trabalho, pudemos aprender a criar um painel interativo e muito interessante que transforma dados de uma tabela em um frontend bonitinho e bem autoexplicativo. Esse tipo de painel pode ser muito útil para apresentar dados que inicialmente só estavam em linhas e colunas, mas que podem ser lidos em um painel extremamente útil. 
 
 **Papel de cada integrante:**
 
-- Beatriz Apóstolo Della Nina: *[o que fez no projeto]*
-- Liz Vilibor: *[o que fez no projeto]*
-- Liliana Palhares Souza: *[o que fez no projeto]*
-- Luiza Dias Genta: *[o que fez no projeto]*
-- Rafaela Panca: *[o que fez no projeto]*
+- Beatriz Apóstolo Della Nina: ajudou a conferir se estava tudo correto
+- Liz Vilibor: ajudou a conferir se estava tudo correto
+- Liliana Palhares Souza: ajudou a conferir se estava tudo correto
+- Luiza Dias Genta: criou os códigos para criação do painel e atualizou o github 
+- Rafaela Panca: ajudou a conferir se estava tudo correto
