@@ -56,7 +56,7 @@ Faixas de porte (as mesmas do Projeto 1): **Pequena** até 200 matrículas, **M�
 
 ## O que o painel mostra
 
-Ao selecionar o Vale do Ribeira, o painel mostra 338 escolas e 63777 matrículas, e o gráfico de esgotamento sanitário mostra que a forma mais comum é da rede pública.
+Ao selecionar o Vale do Ribeira, o painel mostra 338 escolas e 63777 matrículas, e o gráfico de esgotamento sanitário mostra que a forma mais comum é da rede pública. Podemos mudar os filtros selecionados e os dados aparecem conforme cada filtro escolhido. 
 
 ## Organização do programa
 
@@ -64,7 +64,7 @@ Ao selecionar o Vale do Ribeira, o painel mostra 338 escolas e 63777 matrículas
 | --- | --- | --- |
 | Função `classificar_porte` | Classifica a escola em Pequena, Média ou Grande pelo total de matrículas | Classificação das escolas por tamanho (faixas de matrícula) |
 | Carregamento dos dados (`pd.read_csv`) e criação da coluna `porte` | Lê a base de escolas e acrescenta a coluna de porte | Importação e tratamento da base no Power Query |
-| Filtros (`st.sidebar.selectbox`) | Reduzem a base às escolas da região, do município e da dependência escolhidos | Segmentação de dados |
+| Filtros (`st.selectbox`) | Reduzem a base às escolas da região, do município e da dependência escolhidos | Segmentação de dados |
 | Indicadores (`st.metric`) | Mostram o total de escolas e de matrículas da seleção | Números do dashboard |
 | Gráficos (`st.bar_chart`) | Contam as escolas por porte, localização, água e esgoto | Gráficos dinâmicos |
 | Mapa (`st.map`) | Plota cada escola pela latitude e longitude | Sem correspondência direta no Projeto 2 |
@@ -72,13 +72,7 @@ Ao selecionar o Vale do Ribeira, o painel mostra 338 escolas e 63777 matrículas
 
 ## Uso de Inteligência Artificial
 
-**Ferramenta utilizada:** Claude (Anthropic).
-
-**Para que foi usada:** a partir do painel construído na Aula 21, o Claude ajudou a conferir o que faltava em relação aos requisitos do projeto e a completar o código com mais um filtro, mais um gráfico de característica e mais um gráfico de infraestrutura, além de pequenos ajustes de nomes e rótulos.
-
-**Exemplo de prompt utilizado:** *[COLAR AQUI o prompt real usado pelo grupo.]*
-
-**O que foi ajustado manualmente:** *[DESCREVER os ajustes feitos depois da resposta da IA, por exemplo: conferência dos valores das colunas com `value_counts()`, testes das combinações de filtros, escolha das colunas dos gráficos.]*
+Não utilizamos inteligência artificial para fazer esse projeto. 
 
 ## Fonte de Dados
 
