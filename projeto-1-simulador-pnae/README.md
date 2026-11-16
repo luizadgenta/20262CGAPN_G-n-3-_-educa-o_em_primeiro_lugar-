@@ -4,20 +4,43 @@ Objetivo:
 
 O projeto calcula os valores dos repasses financeiros do Programa Nacional de Alimentação Escolar (PNAE) com base em informações configuráveis, testando quanto dinheiro é direcionado para cada tipo de escola. Ele serve como uma ferramenta para estimar recursos e apoiar a análise orçamentária na política pública de alimentação escolar.
 
-Como usar:
-Planilha Excel (Simulador_PNAE.xlsx)
+## Como usar
 
-Abra o arquivo no Microsoft Excel.
-Na aba Parametros_PNAE, consulte os valores per capita por modalidade, os dias letivos e as faixas de porte da escola (não precisa alterar).
-Na aba Simulador_Escola, edite o número de matrículas de cada modalidade. O total de matrículas, o porte da escola, o repasse anual estimado e a elegibilidade para complementação municipal são calculados automaticamente.
-Na seção "Modelo para Simulação", altere o Fator de Ajuste (por exemplo, 0,15 para +15%) e veja as matrículas ajustadas e o repasse ajustado.
-A Tabela de Dados (A39:C48) mostra o resultado para fatores de -20% a +20%, em passos de 5%.
+### Planilha Excel (`Simulador_PNAE.xlsx`)
 
-Artefato HTML (Simulador_PNAE.html)
+1. Abra o arquivo no Microsoft Excel.
+2. Na aba `Parametros_PNAE`, consulte os valores per capita por modalidade, os dias letivos e as faixas de porte. Não é preciso alterar nada.
+3. Na aba `Simulador_Escola`, edite o número de matrículas de cada modalidade. O total de matrículas, o porte, o repasse anual estimado e a elegibilidade para complementação municipal são calculados automaticamente.
+4. Na seção "Modelo para Simulação", altere o **Fator de Ajuste** (por exemplo, `0,15` para +15%) e veja as matrículas ajustadas e o repasse ajustado.
+5. A **Tabela de Dados** (A39:C48) mostra o repasse para fatores de −20% a +20%, em passos de 5%.
 
-Baixe o arquivo e abra no navegador (Chrome, Edge ou Firefox). Não precisa de internet nem de instalação.
-Edite as matrículas e o fator de ajuste. Os resultados mudam em tempo real.
-Na seção "Tabela de dados", clique em Calcular base e reiniciar e depois em Calcular próximo cenário para reconstruir os 9 cenários, um por vez.
+### Simulador HTML (`Simulador_PNAE.html`)
+
+1. Baixe o arquivo e abra no navegador (Chrome, Edge ou Firefox). Não precisa de internet nem de instalação.
+2. Edite as matrículas e o fator de ajuste; os resultados mudam em tempo real.
+3. Na seção "Tabela de dados", clique em **Calcular base e reiniciar** e depois em **Calcular próximo cenário** para reconstruir os 9 cenários, um por vez.
+
+
+## Arquivos desta pasta
+
+| Arquivo | O que é |
+| --- | --- |
+| `Simulador_PNAE.xlsx` | Planilha com as abas `Parametros_PNAE` e `Simulador_Escola` |
+| `Simulador_PNAE.html` | Versão interativa no navegador, equivalente à planilha |
+
+
+## Regras e fórmulas
+
+| Resultado | Regra | Fórmula no Excel |
+| --- | --- | --- |
+| Total de matrículas | soma das modalidades | `SOMA` |
+| Valor per capita | busca pela modalidade | `PROCV(...; FALSO)` |
+| Porte da escola | Pequena (0 a 200), Média (201 a 400), Grande (401 ou mais) | `PROCV(...; VERDADEIRO)` |
+| Repasse anual | soma de matrículas × valor per capita, vezes os dias letivos | `SOMARPRODUTO(...) * dias letivos` |
+| Elegibilidade para complementação municipal | recebe se a escola é **Pequena E** tem matrículas em creche **OU** pré-escola | `=SE(E(B19="Pequena";OU(B10>0;B11>0));"Recebe Complementação";"Não Recebe")` |
+| Matrículas ajustadas | matrículas × (1 + fator de ajuste) | — |
+
+A regra de elegibilidade é um exercício de `SE` aninhado com `E`/`OU`; **não reproduz nenhum critério oficial** de complementação municipal.
 
 Prints do resultado:
 <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/704cef3f-e0e3-4de9-9372-3becd4e726f4" />
@@ -58,10 +81,23 @@ Fonte oficial: Resolução CD/FNDE nº 1/2026, ou Censo Escolar 2024 (INEP)
 
 Link oficial: https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2026/resolucao-cd_fnde-no-1-de-18-de-fevereiro-de-2026-dou-imprensa-nacional.pdf/view
 
-O que os dados representam: São dados dos parâmetros do PNAE de 2026 que representam o repasse do PNAE para cada modalidade de escola, além disso com a planilha criada é possível simular esse repasse com um aumento percentual qualquer afim de analisar o que aconteceria para cada caso. 
+**O que os dados representam:** os valores per capita diários que a União repassa a estados e municípios por aluno de cada modalidade, em 2026 (reajuste médio de 14,35% sobre 2025). Multiplicados pelas matrículas e pelos dias letivos, dão o repasse anual estimado de uma escola. A escola e as matrículas são fictícias, criadas para fins didáticos, e as faixas de porte também foram definidas para este curso.
 
-Estrutura: colunas de modalidade de cada escola, valor per capita por dia, matrículas por porte de escola e além da quantidade de dias letivos por ano. O simulador consiste nesses dados além de uma fórmula de soma produto que calcula o aumento percentual em cada modalidade. 
+**Estrutura:**
 
+| Coluna / campo | Significado |
+| --- | --- |
+| Modalidade | Creche, Pré-escola, Fundamental, Médio, EJA, Indígena/Quilombola, AEE (contraturno) |
+| Valor per capita (R$/dia) | valor repassado por aluno, por dia letivo |
+| Matrículas | número de alunos da escola na modalidade (campo editável) |
+| Dias letivos | 200 dias por ano |
+| Porte | faixa de matrículas totais (Pequena, Média, Grande) |
+| Fator de ajuste | variação percentual aplicada às matrículas na simulação |
+
+
+**O que aprendemos com este projeto:** a estruturar um modelo financeiro dinâmico no Excel, combinando `PROCV`, `SOMARPRODUTO`, `SE` aninhado e Tabela de Dados, e a entender na prática como o repasse do PNAE depende das matrículas, do valor per capita e dos dias letivos.
+
+ 
 ## Participação do Grupo
 
 O que aprendemos com este projeto:
@@ -70,3 +106,21 @@ O grupo aprendeu a estruturar modelagens financeiras dinâmicas integrando fórm
 Papel de cada integrante:
 - Beatriz Apóstolo Della Nina: Desenvolvi o objetivo, o que aprendemos com o projeto e reuni os prints.
 - Luiza Dias Genta: Acabei de formatar a tabela do projeto 1 e criei o HTML
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
