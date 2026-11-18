@@ -19,9 +19,10 @@ Construir um painel completo e reutilizável do Censo Escolar que:
 
 **Fontes de dados utilizadas pelo Power Query:**
 
-- Base principal: Microdados do Censo Escolar 2024 (todos os municípios);
-- Tabelas auxiliares: **Dependência**, **Localização**, **Localização Diferenciada** e **Situação**;
-- Tabela de filtro: intervalo com as células nomeadas **UF** e **Município**.
+Fonte oficial: Censo Escolar da Educação Básica 2024 (INEP), microdados.
+Link oficial: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar
+**O que os dados representam:** cada linha é uma escola em atividade no Brasil em 2024, com características administrativas, matrículas e itens de infraestrutura. São dados públicos; este projeto não é oficial e não representa o INEP ou o MEC. Os números dependem da versão da base e podem diferir de publicações posteriores.
+
 
 ---
 
@@ -46,8 +47,9 @@ A lógica de tratamento é a mesma da versão anterior. O que muda é o volume d
 ## Disclaimers
 
 1. **Fonte de dados:** os dados são públicos e pertencem ao **INEP (Censo Escolar da Educação Básica 2024)**. Este projeto não é oficial e não representa o INEP ou o Ministério da Educação. Os números exibidos dependem da versão da base utilizada e podem diferir de publicações oficiais posteriores.
-2. **Participação**: Luiza Dias Genta fez toda parte do excel (power query), demais participantes ajudaram a tirar eventuais duvidas 
-3. **Uso de IA:** Claude foi usado para assistência em dúvidas de erros que estavam ocorrendo durante o trabalho e explicação de algumas etapas do trabalho. 
+2. **Participação**: Luiza Dias Genta fez toda parte do excel (power query), demais participantes ajudaram a tirar eventuais duvidas
+3. O que aprendemos com este projeto: que filtrar no Power Query reduz o volume antes das dinâmicas e que o arquivo final fica leve.
+4. **Uso de IA:** Claude foi usado para assistência em dúvidas de erros que estavam ocorrendo durante o trabalho e explicação de algumas etapas do trabalho. 
 
 ---
 ## Nota de esclarecimento sobre o formato do arquivo: 
