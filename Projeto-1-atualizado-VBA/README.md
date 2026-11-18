@@ -44,21 +44,30 @@ Para ver o código, abra o editor do VBA com **Alt + F11** e acesse o módulo `m
 - Nesta atualização, para **tirar duvidas sobre a implementação do campo Usuário em VBA**
 
 **Prompts usados:**
-- Pedido de explicação de como arrumar alguns erros que estavam dando ao implementar o Usuario em VBA.
-- Envio do arquivo `Simulador-PNAE-Monitorada_24_09.xlsm` com o pedido de ajustar erros ocorrendo no campo Usuário do simulador.
+- Pedido de explicação de como arrumar alguns erros que estavam dando ao implementar o Usuário em VBA.
+- Envio do arquivo `Simulador-PNAE-Monitorada_24_09.xlsm` com o pedido de: ajuste os erros ocorrendo no campo Usuário do simulador.
 
 
-### Dados
 
-- parâmetros do PNAE de 2026, conforme a Resolução CD/FNDE nº 1, de 18 de fevereiro de 2026, que altera a Resolução CD/FNDE nº 6/2020.
-  Link: https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2026/resolucao-cd_fnde-no-1-de-18-de-fevereiro-de-2026-dou-imprensa-nacional.pdf/view
+## Fonte de Dados
+
+**Fonte oficial:** Resolução CD/FNDE nº 1/2026 (valores per capita do PNAE).
+
+**Link oficial:** https://www.gov.br/fnde/pt-br/acesso-a-informacao/legislacao/resolucoes/2026/resolucao-cd_fnde-no-1-de-18-de-fevereiro-de-2026-dou-imprensa-nacional.pdf/view
+
+**O que os dados representam:** valores per capita diários do repasse do PNAE por modalidade. As matrículas e a escola (EMEB Vila Quitaúna, Osasco/SP) são fictícias. As simulações gravadas no banco de dados são registros de uso da planilha, não dados oficiais.
 
 
 ### Participação do grupo
 
+**O que aprendemos com este projeto:**  
+A automatizar uma rotina com VBA (ler, validar, gravar e limpar) e a registrar o raciocínio por trás de cada simulação.
 
 **Papel de cada integrante neste projeto:**
 - Luiza Dias Genta: *(implementação do campo Usuário em VBA, formatação da planilha, README e testes)*
 - Demais integrantes: *(ajudaram a tirar duvidas sobre algumas questões do trabalho além de acompanharem o andamento do projeto)*
+
+
+
 
 
