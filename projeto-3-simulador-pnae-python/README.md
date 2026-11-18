@@ -6,7 +6,7 @@ O simulador calcula o repasse anual do PNAE que a União destina a uma escola (c
 
 ## Como usar
 
-**O que é preciso:** Python 3 instalado (https://www.python.org). Não é necessário instalar nenhum pacote.
+**O que é preciso:** Python 3 instalado (https://www.python.org).
 
 **Como rodar:** abra o terminal na pasta do projeto e execute:
 
