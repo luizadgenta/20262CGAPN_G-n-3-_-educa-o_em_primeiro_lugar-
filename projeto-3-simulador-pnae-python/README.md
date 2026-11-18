@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-O simulador calcula o repasse anual do PNAE que a União destina a uma escola (creche, pré-escola e ensino fundamental), classifica o porte da escola e estima **que parcela do custo dos alimentos esse repasse consegue cobrir**. Pode ser usado para estimar recursos de uma escola e discutir se o valor federal é suficiente para a alimentação escolar. Aqui o simulador foi aplicado a uma escola pública real, **[PREENCHER: nome da escola]**.
+O simulador calcula o repasse anual do PNAE que a União destina a uma escola (creche, pré-escola e ensino fundamental), classifica o porte da escola e estima **que parcela do custo dos alimentos esse repasse consegue cobrir**. Pode ser usado para estimar recursos de uma escola e discutir se o valor federal é suficiente para a alimentação escolar. Aqui o simulador foi aplicado na **Escola Alipio da Silva Lavoura Prof Cemeief**.
 
 ## Como usar
 
@@ -13,13 +13,11 @@ O simulador calcula o repasse anual do PNAE que a União destina a uma escola (c
 ```bash
 python simulador_pnae.py
 ```
-
-(Em alguns computadores o comando é `python3 simulador_pnae.py`.)
+Em alguns computadores o comando é `python3 simulador_pnae.py`.
 
 **Perguntas do programa e respostas esperadas:**
 
 | Pergunta | O que digitar |
-| --- | --- |
 | Digite o seu nome | texto livre |
 | Digite o nome da sua escola | texto livre |
 | Quantidade de dias letivos do ano | número inteiro (ex.: `200`) |
@@ -33,55 +31,8 @@ Só são aceitos números inteiros, sem vírgula, ponto ou espaço. Se o valor f
 
 ## Prints do resultado
 
-![Simulador rodando com a escola real](prints/simulador-escola-real.png)
+<img width="1280" height="930" alt="PRINT" src="https://github.com/user-attachments/assets/31a3a100-ea3e-47b0-b585-d3e3f7caf11f" />
 
-![Teste de conferência com os dados do Projeto 1](prints/simulador-teste-projeto1.png)
-
-## Escola simulada
-
-| Campo | Valor |
-| --- | --- |
-| Nome | [PREENCHER] |
-| Código INEP | [PREENCHER] |
-| Município / UF | [PREENCHER] |
-| Dependência administrativa | [PREENCHER: Municipal ou Estadual] |
-| Situação de funcionamento | Em atividade |
-| Matrículas de creche | [PREENCHER] |
-| Matrículas de pré-escola | [PREENCHER] |
-| Matrículas de ensino fundamental | [PREENCHER] |
-| Dias letivos usados | 200 |
-
-**Como os dados foram encontrados no Censo Escolar 2024:**
-
-1. Arquivo utilizado: [PREENCHER: nome do arquivo de microdados, ex.: `microdados_ed_basica_2024.csv`] e o dicionário de dados do Censo.
-2. Variáveis usadas: [PREENCHER: confirmar os nomes no dicionário] para nome (`NO_ENTIDADE`), código INEP (`CO_ENTIDADE`), município (`NO_MUNICIPIO`), UF (`SG_UF`), dependência administrativa (`TP_DEPENDENCIA`), situação de funcionamento (`TP_SITUACAO_FUNCIONAMENTO`) e matrículas de creche, pré-escola e ensino fundamental.
-3. Filtro: [PREENCHER: como a escola foi filtrada, ex.: por `NO_ENTIDADE` e `NO_MUNICIPIO`, confirmando depois o `CO_ENTIDADE`].
-4. [PREENCHER, se for o caso: "A escola não tem matrículas em [etapa]; o simulador recebeu 0 para ela."]
-
-## Custo dos alimentos
-
-| Item | Informação |
-| --- | --- |
-| Valor adotado por refeição | R$ [PREENCHER] |
-| Fonte | [PREENCHER: instituição e documento] |
-| Link | [PREENCHER] |
-| Data da informação | [PREENCHER] |
-| Justificativa | [PREENCHER: por que o valor é razoável para esta escola] |
-
-**Ressalvas de comparabilidade:** [PREENCHER: se a fonte é de outro município, outro ano ou outra etapa de ensino, dizer isso e comentar como pode afetar o resultado. Ex.: um valor de 2025 tende a subestimar o custo de 2026 pela inflação de alimentos.]
-
-Este valor é só o custo dos **alimentos**. A Lei nº 11.947/2009 limita o uso do recurso do PNAE à compra de gêneros alimentícios; merendeiras, gás, equipamentos e cozinhas são pagos por estados e municípios com recursos próprios e **não entram** neste cálculo.
-
-## Resultados e reflexão
-
-### Resultados
-
-| Indicador | Valor |
-| --- | --- |
-| Repasse anual total | R$ [PREENCHER] |
-| Custo anual estimado dos alimentos | R$ [PREENCHER] |
-| Cobertura do repasse federal | [PREENCHER]% |
-| Diferença a ser coberta por outras fontes | R$ [PREENCHER] |
 
 ### Como o cálculo é feito
 
@@ -91,10 +42,7 @@ Este valor é só o custo dos **alimentos**. A Lei nº 11.947/2009 limita o uso 
 
 ### Reflexão
 
-> Rascunho para o grupo revisar, ajustar com os números reais e **conferir contra as três leituras indicadas** (Todos Pela Educação, 2023; Observatório da Alimentação Escolar, 21/10/2025; Brasil de Fato, 16/10/2025). Citem as leituras pelo nome e substituam as frases genéricas por dados que vocês leram nelas.
-
-O repasse federal do PNAE é complementar: a Constituição e a lei preveem que estados e municípios completem o valor com recursos próprios. No caso de [ESCOLA], o repasse cobre [X]% do custo estimado dos alimentos, e a diferença anual de R$ [Y] precisa vir do orçamento do [município/estado]. Quando essa diferença não é coberta, a escola precisa escolher o que sacrificar. As leituras indicam que o efeito aparece na qualidade do cardápio (menos alimentos in natura, mais itens baratos e ultraprocessados), na quantidade servida e na dificuldade de cumprir metas como a compra de alimentos da agricultura familiar.
-
+O repasse federal do PNAE é complementar: a Constituição e a lei preveem que estados e municípios completem o valor com recursos próprios. No caso de Escola Alipio da Silva Lavoura Prof Cemeief, o repasse cobre 21.927166874591574% do custo estimado dos alimentos, e a diferença anual de R$ 289124.0  precisa vir do orçamento do Osasco/SP. Quando essa diferença não é coberta, a escola precisa escolher o que sacrificar. As leituras indicam que o efeito aparece na qualidade do cardápio (menos alimentos in natura, mais itens baratos e ultraprocessados), na quantidade servida e na dificuldade de cumprir metas como a compra de alimentos da agricultura familiar.
 Isso importa porque, para muitos estudantes, a refeição escolar é a principal refeição do dia. Redes com menos capacidade fiscal tendem a complementar menos, e a desigualdade de financiamento entre municípios se transforma em desigualdade de alimentação.
 
 ### Simplificações do simulador
@@ -137,7 +85,7 @@ Isso importa porque, para muitos estudantes, a refeição escolar é a principal
 
 | Variável | Significado |
 | --- | --- |
-| [PREENCHER: nomes das variáveis do Censo usadas] | nome, código INEP, município, UF, dependência, situação de funcionamento e matrículas por etapa |
+| Nome Escola, Número de matrículas, Repasse| nome, código INEP, município, UF, dependência, situação de funcionamento e matrículas por etapa |
 | Valor per capita | R$ por aluno por dia letivo, por etapa |
 
 **Custo dos alimentos:** 
