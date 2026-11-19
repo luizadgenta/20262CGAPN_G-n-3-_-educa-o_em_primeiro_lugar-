@@ -18,7 +18,7 @@ Cada projeto foi construído primeiro em Excel (Projetos 1 e 2, com automações
 | Pasta | O que é | Ferramenta |
 | --- | --- | --- |
 | [`projeto-1-simulador-pnae`](./projeto-1-simulador-pnae) | Simulador de repasse do PNAE: matrículas por modalidade, porte, repasse anual, elegibilidade e cenários de variação. Inclui planilha e simulador HTML. | Excel, HTML |
-| [`projeto-1-atualizado-com-automacao-vba`](./projeto-1-atualizado-com-automacao-vba) | O mesmo simulador, com macro que registra cada simulação (data, fator, racional e usuário) em um banco de dados. | Excel, VBA |
+| [`projeto-1-atualizado-vba`](./projeto-1-atualizado-com-automacao-vba) | O mesmo simulador, com macro que registra cada simulação (data, fator, racional e usuário) em um banco de dados. | Excel, VBA |
 | [`projeto-2-painel-censo`](./projeto-2-painel-censo) | Painel do Censo Escolar 2024 (estado de São Paulo) com tabelas dinâmicas, gráficos e segmentações. | Excel |
 | [`projeto-2-atualizado`](./projeto-2-atualizado) | Painel com a base nacional do Censo Escolar, filtrada por município dentro do Power Query. | Excel, Power Query |
 | [`projeto-3-simulador-pnae-python`](./projeto-3-simulador-pnae-python) | Simulador do PNAE em Python, aplicado a uma escola real, com cálculo da cobertura do custo dos alimentos pelo repasse federal. | Python |
